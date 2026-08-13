@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MathVista × GSM8K 中文样题册</title>
+  <style>
+    :root { --ink:#18201d; --muted:#68736d; --paper:#f4f1e9; --card:#fffdf8; --line:#d8d4c9; --mint:#bde5cf; --green:#176b4d; --orange:#ed7046; --blue:#5a7bd8; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--paper); font:16px/1.65 system-ui,-apple-system,"Noto Sans SC","Microsoft YaHei",sans-serif; }
+    .hero { padding:72px max(24px,calc((100vw - 1180px)/2)); background:linear-gradient(135deg,#153c30,#176b4d 65%,#27906a); color:white; }
+    .eyebrow { margin:0 0 12px; text-transform:uppercase; letter-spacing:.15em; font-size:13px; opacity:.78; }
+    h1 { margin:0; max-width:850px; font-size:clamp(38px,7vw,78px); line-height:1.05; letter-spacing:-.045em; }
+    .lead { max-width:760px; margin:24px 0 0; font-size:18px; opacity:.88; }
+    main { width:min(1180px,calc(100% - 32px)); margin:32px auto 80px; }
+    .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:-60px; position:relative; }
+    .stat { padding:22px; border:1px solid rgba(0,0,0,.08); border-radius:18px; background:var(--card); box-shadow:0 14px 36px rgba(15,50,38,.12); }
+    .stat strong { display:block; font-size:30px; line-height:1.1; }
+    .stat span { color:var(--muted); font-size:13px; }
+    .intro { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:32px 0; }
+    .panel { padding:26px; border:1px solid var(--line); border-radius:20px; background:var(--card); }
+    .panel h2 { margin:0 0 8px; font-size:26px; }
+    .panel p { margin:8px 0; color:#3e4944; }
+    .bars { margin-top:18px; display:grid; gap:9px; }
+    .bar-row { display:grid; grid-template-columns:105px 1fr 44px; gap:10px; align-items:center; font-size:13px; }
+    .track { height:9px; overflow:hidden; border-radius:99px; background:#e7e3d9; }
+    .fill { height:100%; border-radius:inherit; background:var(--orange); }
+    .controls { position:sticky; top:12px; z-index:3; display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:28px 0 18px; padding:12px; border:1px solid var(--line); border-radius:16px; background:rgba(255,253,248,.94); backdrop-filter:blur(12px); }
+    button,input,select { font:inherit; }
+    button { cursor:pointer; border:1px solid var(--line); border-radius:999px; padding:9px 16px; background:white; color:var(--ink); }
+    button.active { border-color:var(--green); background:var(--green); color:white; }
+    input { flex:1; min-width:190px; padding:9px 14px; border:1px solid var(--line); border-radius:999px; background:white; }
+    .count { margin-left:auto; color:var(--muted); font-size:14px; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .card { overflow:hidden; border:1px solid var(--line); border-radius:18px; background:var(--card); }
+    .visual { display:flex; align-items:center; justify-content:center; height:220px; padding:12px; background:#ece9e0; }
+    .visual img { width:100%; height:100%; object-fit:contain; }
+    .body { padding:18px; }
+    .meta { display:flex; justify-content:space-between; gap:8px; margin-bottom:10px; color:var(--muted); font-size:12px; }
+    .tag { padding:2px 8px; border-radius:999px; background:#e9f4ee; color:var(--green); }
+    .question { margin:0 0 12px; font-size:16px; line-height:1.58; }
+    .choices { margin:0 0 14px; padding-left:22px; color:#46514c; font-size:14px; }
+    details { border-top:1px solid var(--line); padding-top:11px; color:var(--green); }
+    summary { cursor:pointer; font-weight:700; }
+    .answer { margin:8px 0 0; color:var(--ink); }
+    footer { margin-top:36px; padding:22px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; }
+    a { color:var(--green); }
+    .empty { grid-column:1/-1; padding:60px; text-align:center; color:var(--muted); }
+    @media (max-width:900px) { .stats,.grid { grid-template-columns:repeat(2,1fr); } .intro { grid-template-columns:1fr; } }
+    @media (max-width:590px) { .hero { padding-top:48px; padding-bottom:84px; } .stats,.grid { grid-template-columns:1fr; } .stat { padding:16px; } .count { width:100%; margin-left:4px; } }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">Visual & Verbal Mathematical Reasoning</p>
+    <h1>MathVista × GSM8K<br>中文样题册</h1>
+    <p class="lead">两个常用数学推理基准的快速导览，各展示 30 道官方公开样题的中文翻译与答案。MathVista 保留图像，GSM8K 聚焦多步文字推理。</p>
+  </header>
+  <main>
+    <section class="stats">
+      <div class="stat"><strong>6,141</strong><span>MathVista 总样本数</span></div>
+      <div class="stat"><strong>31</strong><span>MathVista 来源数据集</span></div>
+      <div class="stat"><strong>8,792</strong><span>GSM8K 总题数（7,473 + 1,319）</span></div>
+      <div class="stat"><strong>60</strong><span>本页中文展示题目</span></div>
+    </section>
+
+    <section class="intro">
+      <article class="panel">
+        <h2>MathVista：看图做数学</h2>
+        <p>ICLR 2024 基准，整合 28 个既有多模态数据集与 3 个新数据集（IQTest、FunctionQA、PaperQA）。题目覆盖几何图、函数图、统计图、科学图、自然图像和合成场景，既考视觉感知，也考数学与科学推理。</p>
+        <p><b>划分：</b>testmini 1,000 题，test 5,141 题；正式 test 的答案不公开。本页展示 testmini 的前 30 题。</p>
+        <div class="bars" aria-label="本页 MathVista 样题来源分布">
+          <div class="bar-row"><span>通用视觉问答</span><div class="track"><div class="fill" style="width:53%"></div></div><b>16</b></div>
+          <div class="bar-row"><span>数学定向视觉</span><div class="track"><div class="fill" style="width:47%"></div></div><b>14</b></div>
+          <div class="bar-row"><span>选择题</span><div class="track"><div class="fill" style="width:63%"></div></div><b>19</b></div>
+          <div class="bar-row"><span>自由回答</span><div class="track"><div class="fill" style="width:37%"></div></div><b>11</b></div>
+        </div>
+      </article>
+      <article class="panel">
+        <h2>GSM8K：多步应用题</h2>
+        <p>OpenAI 于 2021 年发布的 Grade School Math 8K，由人工编写、语言表达多样的小学数学应用题组成。典型题目需要 2–8 步，主要使用加、减、乘、除和比例，目标是衡量语言模型能否稳定完成多步推理。</p>
+        <p><b>划分：</b>训练集 7,473 题，测试集 1,319 题。本页展示 test 的前 30 题；只显示最终答案，原数据还提供逐步解答。</p>
+        <div class="bars" aria-label="本页 GSM8K 答案类型分布">
+          <div class="bar-row"><span>金额</span><div class="track"><div class="fill" style="width:40%;background:var(--blue)"></div></div><b>12</b></div>
+          <div class="bar-row"><span>数量</span><div class="track"><div class="fill" style="width:33%;background:var(--blue)"></div></div><b>10</b></div>
+          <div class="bar-row"><span>距离/时间</span><div class="track"><div class="fill" style="width:20%;background:var(--blue)"></div></div><b>6</b></div>
+          <div class="bar-row"><span>比例/其他</span><div class="track"><div class="fill" style="width:7%;background:var(--blue)"></div></div><b>2</b></div>
+        </div>
+      </article>
+    </section>
+
+    <nav class="controls" aria-label="题目筛选">
+      <button class="active" data-set="all">全部</button>
+      <button data-set="mathvista">MathVista</button>
+      <button data-set="gsm8k">GSM8K</button>
+      <input id="search" type="search" placeholder="搜索题目、答案或来源…">
+      <button id="toggleAnswers">展开全部答案</button>
+      <span class="count" id="count"></span>
+    </nav>
+    <section class="grid" id="gallery"></section>
+
+    <footer>
+      <p><b>抽样说明：</b>为保证可复现性，本页不是随机抽样，而是分别取 MathVista <code>testmini</code> 与 GSM8K <code>test</code> 的前 30 题。中文均为辅助性翻译；严格评测应使用官方英文原文、原图和官方评分脚本。</p>
+      <p><b>来源与许可：</b><a href="https://huggingface.co/datasets/AI4Math/MathVista">MathVista 数据卡</a>（新增贡献 CC BY-SA 4.0；原始图像与问题版权归各来源作者，且禁止将该测试集用作训练集）；<a href="https://github.com/openai/grade-school-math">GSM8K 官方仓库</a>（MIT）；论文：<a href="https://arxiv.org/abs/2310.02255">MathVista</a>、<a href="https://arxiv.org/abs/2110.14168">Training Verifiers to Solve Math Word Problems</a>。访问日期：2026-08-13。</p>
+    </footer>
+  </main>
+  <script>
+    const M = [
+      ["01.png","SciBench","科学图","当弹簧对物体做功时，弹力会随压缩量变化。图中，一个质量为 0.40 kg 的小罐以 0.50 m/s 在无摩擦水平桌面上滑动，随后压缩劲度系数为 750 N/m 的弹簧。小罐恰好停下时，弹簧被压缩了多远？",null,"1.2 cm"],
+      ["02.jpg","TextVQA","自然图像","这个量杯的总容量（最大刻度）是多少？",null,"1000"],
+      ["03.png","GeoQA+","几何图","△ABC 的两条内角平分线 OB、OC 相交于点 O。若 ∠A＝110°，则 ∠BOC＝多少？",["135°","140°","145°","150°"],"C．145°"],
+      ["04.png","CLEVR-Math","合成场景","去掉所有大型橡胶球，再去掉所有大型有光泽的圆柱体。还剩多少个物体？",null,"4"],
+      ["05.png","Geometry3K","几何图","求 ∠H 的度数。",["97°","102°","107°","122°"],"A．97°"],
+      ["06.jpg","UniGeo","几何图","如图，若 CB＝4.0、DB＝7.0，且 D 是 AC 的中点，则 AC 的长度是多少？",["6 cm","7 cm","4 cm","5 cm"],"A．6 cm"],
+      ["07.jpg","IconQA","抽象图","图中显示的是几点？请用时间词填空：八点过（____）。",["半小时","一刻钟","整点","差一刻","过一刻"],"B．一刻钟"],
+      ["08.png","Super-CLEVR","合成场景","棕色金属轿车左侧的微型灰色自行车数量，是否多于微型绿色自行车左侧的物体数量？",["是","否"],"A．是"],
+      ["09.png","GeoQA+","几何图","图中是一棵勾股树，所有四边形都是正方形，所有三角形都是直角三角形。若正方形 A、B 的面积分别为 5、3，则最大正方形 C 的面积是多少？",["15","13","11","8"],"D．8"],
+      ["10.png","IQTest","图形推理","下一个出现的图形是哪一个？",["A","B","C","D","E"],"E"],
+      ["11.png","CLEVR-Math","合成场景","去掉所有红色物体，再去掉所有微型哑光球。还剩多少个物体？",null,"5"],
+      ["12.png","Super-CLEVR","合成场景","金属战斗机的数量是否少于橡胶物体的数量？",["是","否"],"A．是"],
+      ["13.png","DVQA","柱状图","至少在一个类别中获得超过 90% 人偏好的物品有多少个？",null,"0"],
+      ["14.png","Super-CLEVR","合成场景","小型金属喷气机后方的微型物体数量，是否少于微型轿车左侧的微型物体数量？",["是","否"],"A．是"],
+      ["15.jpg","TQA","科学图","如果藻类被完全清除，哪种生物受到的影响最大？",["罗非鱼","普通水蚤","龙虱","蝌蚪"],"B．普通水蚤"],
+      ["16.png","DVQA","柱状图","至少在一家商店中销量少于 5 件的商品有多少种？",null,"2"],
+      ["17.png","GeoQA+","几何图","如图，在 Rt△ABC 中，∠ACB＝90°，D 是 AB 的中点，AB＝10，则 CD 的长是多少？",["5","6","8","10"],"A．5"],
+      ["18.jpg","ScienceQA","自然图像","琳达给滑雪板底部涂一层薄蜡后直线滑下山坡，再去掉蜡重复滑行；她又交替重复四次，鲍勃记录每次用时并比较有蜡与无蜡的平均时间。这个实验最适合回答哪个问题？",["薄蜡与厚蜡相比，哪种情况下滑得更快？","有蜡与无蜡相比，哪种情况下滑得更快？"],"B．有蜡与无蜡相比，哪种情况下滑得更快？"],
+      ["19.jpg","TextVQA","自然图像","图中这个量具能测量的最大数值是多少？",null,"400"],
+      ["20.png","ChartQA","柱状图","最小的两根柱之和是否大于最大的那根柱？",["是","否"],"B．否"],
+      ["21.jpg","IconQA","抽象图","填空描述图示：4 个点被平均分成 2 组，每组有（____）个点。",null,"2"],
+      ["22.jpg","KVQA","自然图像","图中的人物中，有多少人出生于第二次世界大战结束之后？",null,"0"],
+      ["23.png","FunctionQA","函数图","函数 f(x) 在 x＝2 处的导数与在 x＝5 处的导数相比是____。",["更大","相等","更小"],"B．相等"],
+      ["24.png","FigureQA","柱状图","Periwinkle（长春花色）对应的值是最大值吗？",["是","否"],"B．否"],
+      ["25.png","FigureQA","散点图","Medium Periwinkle（中等长春花色）对应的曲线是最平滑的吗？",["是","否"],"B．否"],
+      ["26.png","FigureQA","柱状图","Black（黑色）对应的值大于 Deep Sky Blue（深天蓝色）吗？",["是","否"],"B．否"],
+      ["27.jpg","KVQA","自然图像","图中两人的年龄差是多少？",null,"11 岁"],
+      ["28.png","Geometry3K","几何图","AB 是圆的直径，AC＝8 英寸，BC＝15 英寸。求圆的半径。",["7.5","8","8.5","17"],"C．8.5 英寸"],
+      ["29.jpg","KVQA","自然图像","图中两人的年龄差是多少？",null,"4 岁"],
+      ["30.jpg","UniGeo","几何图","如图，圆内两条弦 AB、CD 相交于 E，∠D＝35°，∠AEC＝105°，则 ∠C＝多少？",["60°","70°","80°","85°"],"B．70°"]
+    ].map((x,i)=>({set:"mathvista",n:i+1,image:"assets/mathvista/"+x[0],source:x[1],kind:x[2],q:x[3],choices:x[4],answer:x[5]}));
+
+    const G = [
+      ["珍妮特的鸭子每天产 16 枚蛋。她每天早餐吃 3 枚，又用 4 枚给朋友烤松饼，其余的在农贸市场以每枚 2 美元出售。她每天能卖得多少钱？","18 美元"],
+      ["一件长袍需要 2 匹蓝色布料，白色布料用量是蓝色的一半。总共需要多少匹布料？","3 匹"],
+      ["乔希买下一栋 80,000 美元的房子，又花 50,000 美元维修。维修后房屋价值比原购买价增加了 150%。他的利润是多少？","70,000 美元"],
+      ["詹姆斯每周跑步 3 次，每次跑 3 个 60 米冲刺。他一周总共跑多少米？","540 米"],
+      ["温迪每天给每只鸡喂 3 杯饲料，分三餐。她有 20 只鸡，早上喂了 15 杯，下午喂了 25 杯，晚餐还需喂多少杯？","20 杯"],
+      ["凯拉尔买玻璃杯，每只原价 5 美元，但每第二只只收原价的 60%。买 16 只共需多少钱？","64 美元"],
+      ["图卢兹的羊是查尔斯顿的 2 倍，查尔斯顿的羊是西雅图的 4 倍。若西雅图有 20 只羊，三地共有多少只？","260 只"],
+      ["卡拉下载一个 200 GB 的文件，速度为 2 GB/分钟。下载到 40% 时，Windows 强制重启安装更新，耗时 20 分钟；之后必须从头下载。总共需要多久？","160 分钟"],
+      ["约翰以 60 英里/小时开了 3 小时后掉头回家。返程计划 4 小时：前 2 小时堵车不动，接着半小时以 30 英里/小时行驶，剩余时间以 80 英里/小时行驶。4 小时后他离家多远？","45 英里"],
+      ["伊莱扎每周前 40 小时的时薪为 10 美元，加班时薪为正常的 1.2 倍。她本周工作 45 小时，共收入多少？","460 美元"],
+      ["某程序首月下载 60 次，次月是首月的 3 倍，第三个月比第二个月减少 30%。三个月总下载量是多少？","366 次"],
+      ["图拉买了 3 打甜甜圈（每打 68 美元）、2 打迷你纸杯蛋糕（每打 80 美元）和 6 打迷你芝士蛋糕（每打 55 美元）。总价是多少？","694 美元"],
+      ["卡洛斯种一棵柠檬树，种植成本 90 美元。每年结 7 个柠檬，每个卖 1.5 美元；每年浇水施肥花 3 美元。第几年开始真正赚钱？","第 13 年"],
+      ["梅拉妮上门卖吸尘器。她在绿房子卖掉原有数量的三分之一，在红房子又卖 2 台，再在橙房子卖掉剩余数量的一半，最后剩 5 台。她起初有多少台？","18 台"],
+      ["舞蹈班有 20 名学生，20% 选现代舞；剩余学生的 25% 选爵士舞，其余选嘻哈舞。选嘻哈舞的占全班百分之多少？","60%"],
+      ["商人可在价值 5,000 美元的珠宝与价值 8,000 美元的电子产品中选一种投资。预计本月珠宝上涨 2.5%，电子产品上涨 1.2%。最大利润是多少？","125 美元"],
+      ["两列火车同时离开圣拉斐尔，各向西行驶 80 英里；第二天各向北行驶 150 英里。每列火车两天共行驶多远？","230 英里"],
+      ["吉尔当教师每小时 20 美元，当啦啦队教练每小时 30 美元。她每年工作 50 周，每周教书 35 小时、执教 15 小时。年薪是多少？","57,500 美元"],
+      ["克莱尔每天早餐做一个用 3 枚蛋的煎蛋卷。4 周里她会吃掉多少打鸡蛋？","7 打"],
+      ["玛丽莎徒步一条 12 英里路线。前 4 英里走了 1 小时，随后 2 英里又走了 1 小时。若她想让全程平均速度达到 4 英里/小时，剩余路程需以多快速度行走？","6 英里/小时"],
+      ["我有 10 升橙味饮料，其中三分之二是水；另有 15 升菠萝饮料，其中五分之三是水。混合时洒掉了 1 升橙味饮料。剩余 24 升中有多少升水？","15 升"],
+      ["雷蒙德比表妹萨曼莎早出生 6 年，并在 23 岁时生了一个儿子。若萨曼莎现在 31 岁，雷蒙德的儿子是多少年前出生的？","14 年前"],
+      ["比利周二有 8 位顾客：前 3 位各买 1 张 DVD，接下来的 2 位各买 2 张，最后 3 位一张也没买。他共卖出多少张？","7 张"],
+      ["蜡烛每燃烧 1 小时会缩短 2 厘米。从下午 1 点燃烧到下午 5 点，会缩短多少厘米？","8 厘米"],
+      ["凯尔以 19.50 美元买了一本畅销书，这是在原价基础上打七五折后的价格。原价是多少？","26 美元"],
+      ["玛丽买了 12 美元的鸡肉套餐、5 盒每盒 3 美元的牛奶、4 个每个 1.50 美元的苹果和若干盒披萨，共付 50 美元。每盒披萨 8.50 美元，她买了几盒？","2 盒"],
+      ["米什卡买了 3 条短裤、3 条长裤和 3 双鞋。每条短裤 16.50 美元，每条长裤 22.50 美元，每双鞋 42 美元。总共花了多少钱？","243 美元"],
+      ["辛西娅每晚吃一份冰淇淋。每盒有 15 份，售价 4 美元。60 天后她共花多少钱？","16 美元"],
+      ["亨利骑行 60 英里，途中停两次：第一次在骑完 20 英里后，第二次在距终点 15 英里处。两次停车点之间相距多少英里？","25 英里"],
+      ["格洛丽亚在一双靴子与两双高跟鞋之间选择。两双高跟鞋的总价比靴子低 5 美元；其中一双 33 美元，另一双价格是它的 2 倍。靴子多少钱？","104 美元"]
+    ].map((x,i)=>({set:"gsm8k",n:i+1,source:"GSM8K test",kind:"文字应用题",q:x[0],choices:null,answer:x[1]}));
+
+    const all = [...M,...G], gallery = document.querySelector("#gallery"), search = document.querySelector("#search"), count = document.querySelector("#count");
+    let active = "all", expanded = false;
+    const esc = s => String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+    function render() {
+      const key=search.value.trim().toLowerCase();
+      const rows=all.filter(x=>(active==="all"||x.set===active)&&(!key||[x.q,x.answer,x.source,x.kind].join(" ").toLowerCase().includes(key)));
+      count.textContent=`显示 ${rows.length} / 60 题`;
+      gallery.innerHTML=rows.length?rows.map(x=>`<article class="card">
+        ${x.image?`<div class="visual"><img loading="lazy" src="${x.image}" alt="MathVista 第 ${x.n} 题配图"></div>`:""}
+        <div class="body"><div class="meta"><span class="tag">${x.set==="mathvista"?"MathVista":"GSM8K"} · ${String(x.n).padStart(2,"0")}</span><span>${esc(x.source)} · ${esc(x.kind)}</span></div>
+        <p class="question">${esc(x.q)}</p>
+        ${x.choices?`<ol class="choices" type="A">${x.choices.map(c=>`<li>${esc(c)}</li>`).join("")}</ol>`:""}
+        <details ${expanded?"open":""}><summary>查看答案</summary><p class="answer">${esc(x.answer)}</p></details></div></article>`).join(""):`<div class="empty">没有匹配的题目。</div>`;
+    }
+    document.querySelectorAll("[data-set]").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("[data-set]").forEach(x=>x.classList.remove("active"));b.classList.add("active");active=b.dataset.set;render()}));
+    search.addEventListener("input",render);
+    document.querySelector("#toggleAnswers").addEventListener("click",e=>{expanded=!expanded;e.target.textContent=expanded?"折叠全部答案":"展开全部答案";render()});
+    render();
+  </script>
+</body>
+</html>
