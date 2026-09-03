@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>边听 / 边说 / 边读时也做 Reasoning</title>
+  <style>
+    :root {
+      --bg: #f6f3ec;
+      --paper: #fffdf8;
+      --ink: #1c1914;
+      --muted: #5c574e;
+      --line: #e4ddd0;
+      --listen: #2f6f4e;
+      --speak: #8a4b12;
+      --read: #2c4f7c;
+      --chip: #efe8d8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Songti SC", serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    header {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 48px 24px 16px;
+    }
+    header p.kicker {
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      margin: 0 0 8px;
+    }
+    h1 { font-size: clamp(28px, 4vw, 42px); margin: 0 0 12px; font-weight: 650; }
+    .lede { font-size: 18px; color: var(--muted); max-width: 46em; }
+    nav.filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      max-width: 1080px;
+      margin: 8px auto 0;
+      padding: 0 24px 24px;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+    }
+    nav.filters button {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    nav.filters button.active { background: var(--ink); color: #fff; }
+    main { max-width: 1080px; margin: 0 auto; padding: 0 24px 80px; }
+    section { margin-bottom: 40px; }
+    h2 { font-size: 22px; margin: 0 0 12px; }
+    .timeline {
+      display: grid;
+      gap: 10px;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 14px;
+    }
+    .bar {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+    .bar .label { color: var(--muted); }
+    .bar .track {
+      display: flex;
+      height: 28px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #ece6d8;
+    }
+    .seg { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; }
+    .listen { background: var(--listen); }
+    .think { background: #4a3f8c; }
+    .speak { background: var(--speak); }
+    .wait { background: #b7b0a3; color: #fff; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+    article.card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    article.card h3 { margin: 0; font-size: 17px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 11px;
+      background: var(--chip);
+      border-radius: 999px;
+      padding: 2px 8px;
+    }
+    .tag.listen-tag { color: var(--listen); }
+    .tag.speak-tag { color: var(--speak); }
+    .tag.read-tag { color: var(--read); }
+    article.card p { margin: 0; font-size: 14.5px; color: var(--muted); }
+    article.card a { color: var(--ink); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 13px;
+      background: var(--paper);
+    }
+    th, td { border-bottom: 1px solid var(--line); text-align: left; padding: 8px 10px; vertical-align: top; }
+    th { background: #f3eee4; font-weight: 600; }
+    .pick {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 14px;
+    }
+    .pick div {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .pick strong { display: block; margin-bottom: 4px; }
+    footer { max-width: 1080px; margin: 0 auto; padding: 0 24px 48px; color: var(--muted); font-size: 13px; }
+    @media (max-width: 640px) {
+      .bar { grid-template-columns: 1fr; }
+      table { font-size: 12px; display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="kicker">Interleaved reasoning · 2026-09</p>
+    <h1>现在也在做 Reasoning 的一些做法</h1>
+    <p class="lede">
+      标准范式是输入到齐再写完整 CoT。实时交互要把思考叠进仍在走的时间轴：
+      <strong>用户还在说</strong>、<strong>自己还在说</strong>、或<strong>文本还在流进来</strong>。
+      下面按时间窗整理当前做法，而不是再列一篇 o1/R1 综述。
+    </p>
+  </header>
+  <nav class="filters" aria-label="筛选时间窗">
+    <button type="button" class="active" data-filter="all">全部</button>
+    <button type="button" data-filter="listen">边听边想</button>
+    <button type="button" data-filter="speak">边说边想</button>
+    <button type="button" data-filter="read">边读 / 边答</button>
+  </nav>
+  <main>
+    <section>
+      <h2>时间轴在争什么</h2>
+      <div class="timeline">
+        <div class="bar"><span class="label">Batch</span><div class="track"><span class="seg wait" style="flex:3">听完整句</span><span class="seg think" style="flex:3">想完整 CoT</span><span class="seg speak" style="flex:2">再说</span></div></div>
+        <div class="bar"><span class="label">边听边想</span><div class="track"><span class="seg listen" style="flex:3">听</span><span class="seg think" style="flex:3">听的同时想</span><span class="seg speak" style="flex:2">马上说</span></div></div>
+        <div class="bar"><span class="label">边说边想</span><div class="track"><span class="seg wait" style="flex:3">听完整句</span><span class="seg speak" style="flex:2">说</span><span class="seg think" style="flex:3">播放空闲继续想</span></div></div>
+        <div class="bar"><span class="label">混合</span><div class="track"><span class="seg listen" style="flex:2">听</span><span class="seg think" style="flex:2">预热状态</span><span class="seg speak" style="flex:2">开口</span><span class="seg think" style="flex:2">边说边补</span></div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>方法卡片</h2>
+      <div class="grid" id="cards">
+        <article class="card" data-kind="listen">
+          <div class="tags"><span class="tag listen-tag">边听边想</span><span class="tag">QC 触发</span><span class="tag">DPO</span></div>
+          <h3>Shih et al. · Think while Listening</h3>
+          <p>Moshi 三流。用 Question Completeness ζ(p) 找语义拐点，把文本 CoT 左移到用户还在说的时候；Length-DPO 再压 endpoint 后静默。文本 CoT 约 2.4× 口语推理，延迟可降约 70%。</p>
+          <p><a href="https://arxiv.org/abs/2510.07497">arXiv:2510.07497</a></p>
+        </article>
+        <article class="card" data-kind="listen">
+          <div class="tags"><span class="tag listen-tag">边听边想</span><span class="tag">固定 chunk</span><span class="tag">agent</span></div>
+          <h3>SHANKS</h3>
+          <p>约 4s 一块音频就写一段 unspoken CoT。不只为了更快回答：听用户讲题时可更准地打断（+37.1%），56.9% 的 tool call 发生在用户说完之前。</p>
+          <p><a href="https://arxiv.org/abs/2510.06917">arXiv:2510.06917</a> · <a href="https://d223302.github.io/SHANKS/">项目页</a></p>
+        </article>
+        <article class="card" data-kind="listen">
+          <div class="tags"><span class="tag listen-tag">边听边想</span><span class="tag">控制器</span><span class="tag">DAPO</span></div>
+          <h3>wait / think / answer</h3>
+          <p>Qwen2.5-Omni 上学何时外化短状态。只优化最终答案会变成一直 wait。六奖励 DAPO：SRQA 67.6%→70.3%，并把 endpoint 后 final-think 从 10.44 压到 8.99 token。</p>
+          <p><a href="https://arxiv.org/abs/2605.27190">arXiv:2605.27190</a></p>
+        </article>
+        <article class="card" data-kind="listen">
+          <div class="tags"><span class="tag listen-tag">边听边想</span><span class="tag">结构化节点</span><span class="tag">全双工</span></div>
+          <h3>Chronological Thinking</h3>
+          <p>听的阶段不要再预测 silence，改成 entity/intent/action/knowledge/logic 节点。思考摊在 listening window，用户停口立刻停想。轻量会话，不是长数学 CoT。</p>
+          <p><a href="https://arxiv.org/abs/2510.05150">arXiv:2510.05150</a></p>
+        </article>
+        <article class="card" data-kind="listen">
+          <div class="tags"><span class="tag listen-tag">边听边想</span><span class="tag">latent</span><span class="tag">零延迟</span></div>
+          <h3>FLAIR · Silent Thought</h3>
+          <p>隐状态递归回灌，ELBO 对齐非因果专家，无需写出 CoT。前向即思考，延迟约 0，后续词更好改假设；代价是思考不可读、难驱动工具。</p>
+          <p><a href="https://arxiv.org/abs/2603.17837">arXiv:2603.17837</a></p>
+        </article>
+        <article class="card" data-kind="listen">
+          <div class="tags"><span class="tag listen-tag">边听边想</span><span class="tag">级联</span><span class="tag">语义触发</span></div>
+          <h3>LTS-VoiceAgent</h3>
+          <p>Dynamic Semantic Trigger 丢掉无信息片段；后台 Thinker 维护可修订状态，前台 Speaker 投机说。适合已有 ASR–LLM–TTS、不想换端到端底座。</p>
+          <p><a href="https://arxiv.org/abs/2601.19952">arXiv:2601.19952</a></p>
+        </article>
+        <article class="card" data-kind="speak">
+          <div class="tags"><span class="tag speak-tag">边说边想</span><span class="tag">chunk 交织</span></div>
+          <h3>STITCH</h3>
+          <p>说一块、想下一块：播放第 N 块时用 GPU 空闲写 unspoken CoT。延迟对齐「不思考」基线，数学约 +15%。推理慢于播放就会卡。</p>
+          <p><a href="https://arxiv.org/abs/2507.15375">arXiv:2507.15375</a> · <a href="https://d223302.github.io/STITCH/">项目页</a></p>
+        </article>
+        <article class="card" data-kind="speak">
+          <div class="tags"><span class="tag speak-tag">边说边想</span><span class="tag">token 级</span></div>
+          <h3>Mini-Omni-Reasoner</h3>
+          <p>silent reasoning 与 spoken token 局部对齐交织；Thinker–Talker 只把回复送进合成。Spoken-MQA 算术 +19.1%。数据：SPOKEN-MATH-PROBLEMS-3M。</p>
+          <p><a href="https://arxiv.org/abs/2508.15827">arXiv:2508.15827</a></p>
+        </article>
+        <article class="card" data-kind="speak">
+          <div class="tags"><span class="tag speak-tag">边说边想</span><span class="tag">双脑</span></div>
+          <h3>Mind-Paced Speaking</h3>
+          <p>Formulation Brain 持续产 think，Articulation Brain 先开口再吃后续思考。零延迟配置 Spoken-MQA 92.8%。真正并行，不是单序列切模式。</p>
+          <p><a href="https://arxiv.org/abs/2510.09592">arXiv:2510.09592</a></p>
+        </article>
+        <article class="card" data-kind="speak">
+          <div class="tags"><span class="tag speak-tag">边说边想</span><span class="tag">共情</span></div>
+          <h3>ReEmpathy</h3>
+          <p>块交织用于情感自评：想的是上一句共情是否合适，再改下一句。说明「也做 reasoning」不必是算术推导。</p>
+          <p>见音频推理综述 §V-B2</p>
+        </article>
+        <article class="card" data-kind="read">
+          <div class="tags"><span class="tag read-tag">边读边想</span><span class="tag">并行 KV</span></div>
+          <h3>StreamingThinker</h3>
+          <p>文本流上因果 mask + 独立位置编码 + 并行 KV，读的时候就开始想。相对 batch thinking：开想等待约 -80%，出答案延迟约 -60%。</p>
+          <p><a href="https://arxiv.org/abs/2510.17238">arXiv:2510.17238</a></p>
+        </article>
+        <article class="card" data-kind="read">
+          <div class="tags"><span class="tag read-tag">边想边答</span><span class="tag">RL</span></div>
+          <h3>Apple Interleaved Reasoning</h3>
+          <p>用 PPO/GRPO 训练多跳问答交错输出中间结论。TTFT 平均降 80%+，Pass@1 最高约 +19.3%。交错不一定要语音。</p>
+          <p><a href="https://machinelearning.apple.com/research/interleaved-reasoning">Apple ML</a></p>
+        </article>
+        <article class="card" data-kind="read">
+          <div class="tags"><span class="tag read-tag">披露策略</span><span class="tag">单流</span></div>
+          <h3>SxS · When to Think, When to Speak</h3>
+          <p>单流自回归里学习何时把私有推理变成对外文本：有依据才披露，避免为了 TTFT 灌 filler。</p>
+          <p><a href="https://arxiv.org/abs/2605.03314">arXiv:2605.03314</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>五个设计轴</h2>
+      <table>
+        <thead>
+          <tr><th>轴</th><th>选项</th><th>谁在用</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>何时想</td><td>固定节拍 / 语义饱和 / 可学习 wait-think / 听窗截断 / 说时才想</td><td>SHANKS；QC 与 LTS；DAPO 控制器；Chronological；STITCH</td></tr>
+          <tr><td>载体</td><td>自由文本 CoT / 类型节点 / 短状态 / latent / 双模块</td><td>Shih、SHANKS；Chronological；wait-think-answer；FLAIR；MPS、LTS</td></tr>
+          <tr><td>粒度</td><td>一次长链 / 每 chunk / 多步控制 / token 交织</td><td>Shih；SHANKS；DAPO；Mini-Omni-Reasoner</td></tr>
+          <tr><td>系统</td><td>端到端 SLM / 级联 agent / 双脑 / 并行 KV</td><td>Moshi、Omni；LTS；MPS；StreamingThinker</td></tr>
+          <tr><td>训练</td><td>交织 SFT / DPO / DAPO / ELBO 专家 / 中间步 RL</td><td>多数；Shih；2605.27190；FLAIR；Apple</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>按目标选</h2>
+      <div class="pick">
+        <div><strong>要打断、要提前 tool call</strong>SHANKS，或 LTS 级联。</div>
+        <div><strong>压用户说完后的静默</strong>Shih QC + Length-DPO，或 wait-think-answer 把长 think 摊进听的阶段。</div>
+        <div><strong>全双工、不能加延迟</strong>Chronological Thinking；要零解码开销用 FLAIR。</div>
+        <div><strong>口播数学、可以听完再开</strong>STITCH / Mini-Omni-Reasoner / MPS。</div>
+        <div><strong>长文本边读边想</strong>StreamingThinker；多跳先吐中间结论用 Apple 交错 RL。</div>
+        <div><strong>已有级联管线</strong>LTS-VoiceAgent，不要先换底座。</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>各自会在哪死</h2>
+      <p>边听边想消灭的是 endpoint 后等待，但短问句窗口不够，最后几个词改条件会让已写下的离散 CoT 作废。边说边想不依赖用户话有多长，但推理慢于播放就会口吃，也解决不了「用户还在说就要动手」。更完整的系统几乎一定是听窗预热 + 说窗藏剩余 CoT + 错误假设可回滚。</p>
+    </section>
+  </main>
+  <footer>
+    书面对照见 <a href="docs/interleaved-reasoning.md">docs/interleaved-reasoning.md</a>。
+    综述入口：<a href="https://arxiv.org/abs/2605.21008">A Survey of Audio Reasoning</a>。
+    数字均来自原文，跨论文评测集不可直接比绝对值。
+  </footer>
+  <script>
+    const buttons = document.querySelectorAll("nav.filters button");
+    const cards = document.querySelectorAll("article.card");
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const f = btn.dataset.filter;
+        cards.forEach((c) => {
+          c.style.display = f === "all" || c.dataset.kind === f ? "" : "none";
+        });
+      });
+    });
+  </script>
+</body>
+</html>
